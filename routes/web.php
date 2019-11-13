@@ -11,5 +11,5 @@
 |
 */
 
-Route::get("/","SectionsController@index");
-Route::get("/students","SectionsController@students");
+Route::get('/','SectionsController@index');
+Route::get('/students','SectionsController@students');

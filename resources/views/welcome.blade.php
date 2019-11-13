@@ -37,7 +37,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         var vm = new Vue({
             el: "#app",
@@ -50,20 +50,22 @@
                  fetchStudents(){
                     axios.get('/students?section_id='+this.selected_section)
                     .then(({data})=>{
-                        this.students=(data);
+                        this.students=data;
                         console.log(data);
                     });
                  }
             },
             mounted(){
-                axios.get("/students").then(({data})+>{console.log(data)});
+                axios.get('/students').then(({data})=>{console.log(data)});
             },
             computed:{
                 PaidStudents(){
-                    return this.students.filter(function(students){return student.date_paid !=null;});
+                    return this.students.filter(function(student){
+                        return student.date_paid !=null;});
                 },
                 UnPaidStudents(){
-                    return this.students.filter(function(students){return student.date_paid ==null;});
+                    return this.students.filter(function(student){
+                        return student.date_paid ==null;});
                 }
             }
         })
